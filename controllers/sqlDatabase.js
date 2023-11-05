@@ -19,8 +19,8 @@ var sequelizeTransforms = require('sequelize-transforms');
 // });
 
 const sequelizeInstance = new Sequelize({
-    username: 'ja6bowk8jz182zhh3b8d',
-    password: 'pscale_pw_oQ1Xl5cORiSEC5SYx4FEQdiZskoXnBVfrebXuksmWOl',
+    username: process.env.planetUSER,
+    password: process.env.planetPW,
     database: 'argeldb',
     dialect: 'mysql',
     host: 'aws.connect.psdb.cloud', // Replace with your PlanetScale database hostname
