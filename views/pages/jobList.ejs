@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/header %>
+<body class="animsition">
+
+	<!-- Header -->
+	<header class="header1">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+
+			<div class="wrap_header">
+				<!-- Logo -->
+				<a href="../../" class="logo">
+					<img style="width:100%;" src="images/team_name.jpg" alt="IMG-LOGO">
+				</a>
+
+				<!-- Menu -->
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+								<a href="../../">Resume builder</a>
+							</li>
+
+							<li>
+								<a href="../../joblist">Jobs</a>
+								<ul class="sub_menu">
+									<li><a href="../../joblist">View jobs</a></li>
+									<% if (user.name == "Zakatchi James") { %>
+									<li><a href="/joblist/createjob">Create a job</a></li>
+					
+									<% } %>
+								</ul>
+							</li>
+
+
+
+							<li class="sale-noti">
+								<a style="cursor: pointer; color: blue;"><%= user.name %></a>
+								<ul class="sub_menu">
+									<li>
+									<form id="my_form" action="/logout" method="post">
+										<a style="cursor: pointer;" onclick="document.getElementById('my_form').submit();">Sign out</a>
+									</form>
+								</li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap_header_mobile">
+			<!-- Logo moblie -->
+			<a href="../../" class="logo-mobile">
+				<img src="images/team_name.jpg" alt="IMG-LOGO">
+			</a>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu">
+
+				<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="wrap-side-menu" >
+			<nav class="side-menu">
+				<ul class="main-menu">
+
+					
+
+					<li class="item-menu-mobile">
+						<a href="../../">Home</a>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a href="../../joblist">Jobs</a>
+						<ul class="sub-menu">
+							<li><a href="../../">View jobs</a></li>
+							<% if (user.name == "Zakatchi James") { %>
+								<li><a href="/joblist/createjob">Create a job</a></li>
+				
+								<% } %>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+					</li>
+
+					<li class="item-menu-mobile">
+						<a><%= user.name %></a>
+						<ul class="sub-menu">
+							<li>
+								<form id="my_form" action="/logout" method="post">
+									<a style="cursor: pointer;" onclick="document.getElementById('my_form').submit();">Sign out</a>
+								</form>
+							</li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<br/>
+	<br/>
+	<div class="sec-title p-b-52">
+		<h4 class="m-text5 t-center">
+			List of jobs
+		</h4>
+	</div>
+    <div class="row">
+        <% jobs.forEach(function(jobs){ %>
+                <div class="col-sm-12 col-md-6 col-lg-4 p-b-50 mrsmiley"  data-id="<%= jobs.id%>">
+                    <!-- Block2 -->
+                    <div class=" of-hidden pos-relative">
+                        <a class="list-group-item card" >
+
+                            <div class="comments card-body t-center"  >
+                                
+                                    <h4 class="list-group-item-heading">
+										<button style="color: black" type="submit" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4" onclick="window.location.href='/jobList/job/<%= jobs.id%>'"><%= jobs.title %></button>
+                                       
+                                    </h4>
+                                    <p class="list-group-item-text">
+                                        <%= jobs.desc %>
+                                    </p>
+        
+                                    <p class="list-group-item-text">Category:
+                                        <%= jobs.category %>
+
+                                    </p>
+
+									<br/>
+
+									<% if (user.name == "Zakatchi James") { %>
+                                    <button type="submit" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4" onclick="window.location.href='/jobList/job/<%= jobs.id%>'">Delete job</button>
+									<% } %>
+								</div>
+
+								
+                        </a>
+                    </div>
+
+                </div>
+        <% }); %>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+
+
+
+
+	<div class="t-center s-text8 p-t-20">
+		<a>SC2006 Team_Name</a>
+	</div>
+</div>
+</footer>
+
+
+
+
+	
+
+
+<% include ../partials/footer %>
+</body>
+</html>

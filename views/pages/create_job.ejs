@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <base href="/">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style>
+        .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 505px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+    </style>
+<% include ../partials/header %>
+<body class="animsition">
+
+	<!-- Title Page -->
+	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m">
+		<h2 class="l-text2 t-center" style="color:black">
+			Create a job
+		</h2>
+	</section>
+
+	<!-- content page -->
+
+
+
+
+
+  
+        
+                        <div class="col-md-6 p-b-30" style="margin:auto;">
+
+                            <div class="w-size25">
+                                <!-- Button -->
+                                <button onclick="window.location.href='/jobList'" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                    Back
+                                </button>
+                                
+
+                                
+                            </div>
+                                <form action="/jobList/createjob/" method="post">
+                                <h4 style="text-align:center;" class="m-text26 p-b-36 p-t-15">
+                                    Fill in the details
+                                </h4>
+        
+                                <div class="bo4 of-hidden size15 m-b-20">
+                                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="title" placeholder="Full Title">
+                                </div>
+
+                                <div class="flex-w">
+                                            <div class="rs2-select2 bo4 of-hidden size15 m-b-20">
+                                                <select class="selection-2 sizefull" name="category">
+                                                        <option>Office</option>
+                                                        <option>Industrial</option>
+                                                        <option>Work from Home</option>
+                                                </select>
+                                            </div>
+                
+            
+                                </div>
+                                
+
+                                <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="desc" placeholder="Job Description"></textarea>
+
+
+
+                                <div class="bo4 of-hidden size15 m-b-20">
+                                    <input class="sizefull s-text7 p-l-22 p-r-22" id="ship-address" type="text" name="locName" placeholder="Adress Location">
+                                </div>
+
+
+        
+                                <div class="w-size25">
+                                    <!-- Button -->
+                                    <button type="submit" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                        Post Job
+                                    </button>
+                                    
+
+                                    
+                                </div>
+                            </form>
+                        </div>
+
+
+        
+
+<br/>
+<br/>
+<br/>
+
+
+<br/>
+<br/>
+<br/>
+
+        <br/>
+        <br/>
+		<br/>
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top bg0-hov" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</span>
+	</div>
+
+	<!-- Container Selection -->
+	<div id="dropDownSelect1"></div>
+    <div id="dropDownSelect2"></div>
+    <% include ../partials/footer %>
+    <script type="text/javascript">
+
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect2')
+		});
+	</script>
+
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsLQsmCxwysfq9M9mxdBDm12og5Y7DviE&callback=initAutocomplete&libraries=places&v=weekly"
+defer
+></script>
+
+<script>
+// This sample uses the Places Autocomplete widget to:
+// 1. Help the user select a place
+// 2. Retrieve the address components associated with that place
+// 3. Populate the form fields with those address components.
+// This sample requires the Places library, Maps JavaScript API.
+// Include the libraries=places parameter when you first load the API.
+// For example: <script
+// src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsLQsmCxwysfq9M9mxdBDm12og5Y7DviE&libraries=places">
+let autocomplete;
+let address1Field;
+let address2Field;
+let postalField;
+
+function initAutocomplete() {
+address1Field = document.querySelector("#ship-address");
+address2Field = document.querySelector("#address2");
+postalField = document.querySelector("#postcode");
+// Create the autocomplete object, restricting the search predictions to
+// addresses in the US and Canada.
+autocomplete = new google.maps.places.Autocomplete(address1Field, {
+componentRestrictions: { country: ["SG"] },
+//fields: ["address_components", "geometry"],
+//types: ["address"],
+});
+address1Field.focus();
+// When the user selects an address from the drop-down, populate the
+// address fields in the form.
+autocomplete.addListener("place_changed", fillInAddress);
+}
+
+function fillInAddress() {
+// Get the place details from the autocomplete object.
+const place = autocomplete.getPlace();
+let address1 = "";
+let postcode = "";
+
+// Get each component of the address from the place details,
+// and then fill-in the corresponding field on the form.
+// place.address_components are google.maps.GeocoderAddressComponent objects
+// which are documented at http://goo.gle/3l5i5Mr
+for (const component of place.address_components) {
+// @ts-ignore remove once typings fixed
+const componentType = component.types[0];
+
+switch (componentType) {
+case "street_number": {
+  address1 = `${component.long_name} ${address1}`;
+  break;
+}
+
+case "route": {
+  address1 += component.short_name;
+  break;
+}
+
+case "postal_code": {
+  postcode = `${component.long_name}${postcode}`;
+  break;
+}
+
+case "postal_code_suffix": {
+  postcode = `${postcode}-${component.long_name}`;
+  break;
+}
+case "locality":
+  document.querySelector("#locality").value = component.long_name;
+  break;
+case "administrative_area_level_1": {
+  document.querySelector("#state").value = component.short_name;
+  break;
+}
+case "country":
+  document.querySelector("#country").value = component.long_name;
+  break;
+}
+}
+
+address1Field.value = address1;
+postalField.value = postcode;
+// After filling the form with address components from the Autocomplete
+// prediction, set cursor focus on the second address line to encourage
+// entry of subpremise information such as apartment, unit, or floor number.
+address2Field.focus();
+}
+
+window.initAutocomplete = initAutocomplete;
+</script>
+
+</body>
+</html>
