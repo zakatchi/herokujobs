@@ -40,39 +40,39 @@ const Applicants = sequelizeInstance.define('Applicants', {
 Applicants.sync({ force: true, logging: false }).then(() => {
     Applicants.upsert({
         appName: "Argel",
-        resumeName: "argel_cv.pdf",
+        resumeName: "Argel_CV.pdf",
         yearsOfExperience: "4",
         jobID: "2"
     });
     Applicants.upsert({
-        appName: "James",
-        resumeName: "argel_cv.pdf",
+        appName: "Royce",
+        resumeName: "Argel_CV.pdf",
         yearsOfExperience: "4",
         jobID: "2"
     });
     Applicants.upsert({
-        appName: "Angeles",
-        resumeName: "argel_cv.pdf",
+        appName: "Adam",
+        resumeName: "Argel_CV.pdf",
         yearsOfExperience: "4",
         jobID: "2"
     });Applicants.upsert({
-        appName: "Rebancos",
-        resumeName: "argel_cv.pdf",
+        appName: "Syazwan",
+        resumeName: "Argel_CV.pdf",
         yearsOfExperience: "4",
         jobID: "2"
     });Applicants.upsert({
-        appName: "Argel",
-        resumeName: "argel_cv.pdf",
+        appName: "Thomas",
+        resumeName: "Argel_CV.pdf",
         yearsOfExperience: "4",
         jobID: "1"
     });;Applicants.upsert({
-        appName: "wtf",
-        resumeName: "argel_cv.pdf",
+        appName: "Megan Fox",
+        resumeName: "Argel_CV.pdf",
         yearsOfExperience: "4",
         jobID: "1"
     });;Applicants.upsert({
-        appName: "wtf",
-        resumeName: "argel_cv.pdf",
+        appName: "Mary Jane",
+        resumeName: "Argel_CV.pdf",
         yearsOfExperience: "4",
         jobID: "1"
     });

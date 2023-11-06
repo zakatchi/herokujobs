@@ -49,36 +49,36 @@ const Jobs = sequelizeInstance.define('Jobs', {
 // force: true will drop the table if it already exists
 Jobs.sync({ force: true, logging: false }).then(() => {
     Jobs.upsert({
-        title: "Accountant",
-        desc: "As a senior accountant..",
+        title: "Backend Engineer",
+        desc: "Design, develop, and maintain server-side applications and services, including APIs, databases, and microservices",
         category: "Office",
-        locName: "NTU",
-        longT: "103.6808217",
-        latT: "1.347064"
+        locName: "ByteDance",
+        longT: "103.849980",
+        latT: "1.289440"
     });
     Jobs.upsert({
-        title: "Engineer",
-        desc: "As a senior engineer..",
-        category: "Industrial",
-        locName: "NTU",
-        longT: "103.6808217",
-        latT: "1.347064"
+        title: "Gym Manager",
+        desc: "Manage day to day operations of gym, keep track of inventory, keep track of sales of memberships and promote.",
+        category: "Office",
+        locName: "Kings Arcade shopping centre",
+        longT: "103.810700",
+        latT: "1.323270"
     });
     Jobs.upsert({
-        title: "Doctor",
-        desc: "As a doctor..",
-        category: "Hospital",
-        locName: "NTU",
-        longT: "103.6808217",
-        latT: "1.347064"
+        title: "Life guard",
+        desc: "As a Lifeguard, your primary responsibility is to ensure the safety and well-being of swimmers and visitors at aquatic facilities such as pools, beaches, and water parks. You will be tasked with monitoring swimmers, preventing accidents, and responding promptly to emergencies. This position requires strong swimming skills, CPR and first aid certification, and the ability to enforce safety rules.",
+        category: "Office",
+        locName: "Siloso Beach",
+        longT: "103.830322",
+        latT: "1.249404"
     });
     Jobs.upsert({
-        title: "Retail salesman",
-        desc: "As a retail salesman..",
-        category: "Shopping mall",
-        locName: "NTU",
-        longT: "103.6808217",
-        latT: "1.347064"
+        title: "Security guard",
+        desc: "Patrol residential area hourly, secure area",
+        category: "Office",
+        locName: "NTU Hall of residence 12",
+        longT: "103.681938",
+        latT: "1.351900"
     });
     Jobs.upsert({
         title: "Quant trader",
