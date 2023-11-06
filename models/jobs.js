@@ -66,7 +66,7 @@ Jobs.sync({ force: true, logging: false }).then(() => {
     });
     Jobs.upsert({
         title: "Life guard",
-        desc: "As a Lifeguard, your primary responsibility is to ensure the safety and well-being of swimmers and visitors at aquatic facilities such as pools, beaches, and water parks. You will be tasked with monitoring swimmers, preventing accidents, and responding promptly to emergencies. This position requires strong swimming skills, CPR and first aid certification, and the ability to enforce safety rules.",
+        desc: "As a Lifeguard, your primary responsibility is to ensure the safety and well-being of swimmers and visitors at aquatic facilities.",
         category: "Office",
         locName: "Siloso Beach",
         longT: "103.830322",
