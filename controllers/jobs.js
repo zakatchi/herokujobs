@@ -62,8 +62,41 @@ exports.showJobs = function(req, res)  {
 
 
 
+// exports.createJobs = async function(req,res) {
+//     var post_data = req.body;
+//     console.log(post_data);
+//     console.log("creating jobs");
+
+//     const longLat = await geocoder.geocode(req.body.locName);
+//     console.log("dude", longLat);
+//     console.log("man", req.body);
+    
+//     var jobData = {
+//         title: req.body.title,
+//         desc: req.body.desc,
+//         category: req.body.category,
+//         locName: req.body.locName,
+//         longT: longLat[0].longitude,
+//         latT: longLat[0].latitude
+//     }
+    
+//     Jobs.create(jobData).then((newComment, created) => {
+
+//         if(!newComment) {
+//             return res.send(400, {
+//                 message: "error"
+//             });
+//         }
+        
+        
+//         res.redirect('/jobList');
+//     })
+
+// };
+
 exports.createJobs = async function(req,res) {
-    var post_data = req.body;
+    try {
+        var post_data = req.body;
     console.log(post_data);
     console.log("creating jobs");
 
@@ -91,6 +124,14 @@ exports.createJobs = async function(req,res) {
         
         res.redirect('/jobList');
     })
+
+    } catch (error) {
+        //return res.status(404).json("invalid address");
+        res.render('create_job', {
+            errormsg: "error"
+        });
+    }
+    
 
 };
 
