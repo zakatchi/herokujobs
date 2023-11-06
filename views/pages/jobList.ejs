@@ -2,6 +2,19 @@
 <html lang="en">
 <% include ../partials/header %>
 <body class="animsition">
+	<style>
+        .thicker-border:hover a {
+    border: 2px solid black; /* Example border style */
+}
+
+.shortened-paragraph {
+  max-width: 100%; /* Set your desired maximum width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align:center;
+}
+    </style>
 
 	<!-- Header -->
 	<header class="header1">
@@ -122,7 +135,7 @@
         <% jobs.forEach(function(jobs){ %>
                 <div class="col-sm-12 col-md-6 col-lg-4 p-b-50 mrsmiley"  data-id="<%= jobs.id%>">
                     <!-- Block2 -->
-                    <div class=" of-hidden pos-relative">
+                    <div class=" of-hidden pos-relative thicker-border">
                         <a class="list-group-item card" >
 
                             <div class="comments card-body t-center"  >
@@ -131,7 +144,7 @@
 										<button style="color: black" type="submit" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4" onclick="window.location.href='/jobList/job/<%= jobs.id%>'"><%= jobs.title %></button>
                                        
                                     </h4>
-                                    <p class="list-group-item-text">
+                                    <p class="list-group-item-text shortened-paragraph">
                                         <%= jobs.desc %>
                                     </p>
         
