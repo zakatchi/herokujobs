@@ -2,6 +2,9 @@
 <html lang="en">
 <% include ../partials/header %>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsLQsmCxwysfq9M9mxdBDm12og5Y7DviE&libraries=places"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <style>
  html,
       body {
@@ -864,6 +867,19 @@
 			  <br/>
 
 
+			  <p style="text-align:center;" class="m-text26 p-b-36 p-t-15">
+				Search available Taxis in your area, up to 500 meters away!
+			  </p>
+
+			  <!-- Input field for location search -->
+			  <div class="bo4 of-hidden size15 m-b-20">
+<input class="sizefull s-text7 p-l-22 p-r-22"  type="text" id="locationInput" placeholder="Enter location">
+</div>
+
+<!-- Display the taxi count -->
+<p  class="m-text26 p-b-36 p-t-15" style="text-align:center; font-weight:bold;"id="taxiCount">Please fill in the above!</p>
+
+
 			
 		  
 			  <% if (user.name == "Zakatchi James") { %>
@@ -969,6 +985,81 @@
 			</div>
 		</div>
 	</footer>
+
+	<script>
+		// Function to initialize the Places Autocomplete
+		function initializeAutocomplete() {
+		  const locationInput = document.getElementById('locationInput');
+		  const autocomplete = new google.maps.places.Autocomplete(locationInput, {
+			types: ['geocode']
+			//componentRestrictions: { country: 'SG' } // Restrict to Singapore
+		  });
+
+		  autocomplete.setComponentRestrictions({
+  country: ["SG"],
+});
+	  
+		  // Event listener for when a place is selected
+		  autocomplete.addListener('place_changed', function() {
+			const place = autocomplete.getPlace();
+	  
+			// Get the coordinates of the selected place
+			const targetLat = place.geometry.location.lat();
+			const targetLon = place.geometry.location.lng();
+	  
+			// Call the function to get taxi availability with the new coordinates
+			getTaxiAvailability(targetLat, targetLon);
+		  });
+		}
+	  
+		// Function to get taxi availability with coordinates
+		const getTaxiAvailability = async (targetLat, targetLon) => {
+		  try {
+			const response = await axios.get(
+			  "https://api.data.gov.sg/v1/transport/taxi-availability"
+			);
+			if (response.status === 200) {
+			  const coordinateResponse = response.data.features[0].geometry.coordinates;
+			  const allCoordinates = coordinateResponse.flat();
+	  
+			  const nearbyCount = countNearbyCoordinates(
+				allCoordinates,
+				targetLat,
+				targetLon
+			  );
+	  
+			  // Update the taxi count in the HTML
+			  document.getElementById('taxiCount').innerText = `Taxis in your area: ${nearbyCount}`;
+			}
+		  } catch (error) {
+			console.error("Error fetching taxi availability", error);
+		  }
+		};
+	  
+		// Function to count nearby coordinates
+		const countNearbyCoordinates = (
+		  allCoordinates,
+		  targetLat,
+		  targetLng,
+		  delta = 0.01
+		) => {
+		  let count = 0;
+		  for (let i = 0; i < allCoordinates.length; i += 2) {
+			let lat = allCoordinates[i + 1];
+			let lon = allCoordinates[i];
+			if (
+			  Math.abs(lat - targetLat) <= delta &&
+			  Math.abs(lon - targetLng) <= delta
+			) {
+			  count++;
+			}
+		  }
+		  return count;
+		};
+	  
+		// Initialize the Places Autocomplete when the page loads
+		google.maps.event.addDomListener(window, 'load', initializeAutocomplete);
+	  </script>
 
 	<script>
 		'use strict';
